@@ -80,18 +80,18 @@
 <div class="summary">
   <div class="stat-card total"><div class="num">121</div><div class="label">Total Certs</div></div>
   <div class="stat-card" style="border-color:#991b1b"><div class="num" style="color:#ef4444">0</div><div class="label">Expired</div></div>
-  <div class="stat-card" style="border-color:#7c2d12"><div class="num" style="color:#f97316">6</div><div class="label">Imminent (&le;7 days)</div></div>
-  <div class="stat-card critical-card"><div class="num">7</div><div class="label">Critical (&le;14 days)</div></div>
-  <div class="stat-card warning-card"><div class="num">39</div><div class="label">Warning (&le;30 days)</div></div>
-  <div class="stat-card ok-card"><div class="num">69</div><div class="label">Valid</div></div>
+  <div class="stat-card" style="border-color:#7c2d12"><div class="num" style="color:#f97316">0</div><div class="label">Imminent (&le;7 days)</div></div>
+  <div class="stat-card critical-card"><div class="num">0</div><div class="label">Critical (&le;14 days)</div></div>
+  <div class="stat-card warning-card"><div class="num">0</div><div class="label">Warning (&le;30 days)</div></div>
+  <div class="stat-card ok-card"><div class="num">121</div><div class="label">Valid</div></div>
 </div>
 <div class="controls">
   <button class="filter-btn f-all active" onclick="setFilter('all')">All 121</button>
   <button class="filter-btn f-expired" onclick="setFilter('expired')">&#x2717; Expired 0</button>
-  <button class="filter-btn f-imminent" onclick="setFilter('imminent')">&#x26A0; Imminent 6</button>
-  <button class="filter-btn f-critical" onclick="setFilter('critical')">&#x26A0; Critical 7</button>
-  <button class="filter-btn f-warning" onclick="setFilter('warning')">&#x26A0; Warning 39</button>
-  <button class="filter-btn f-ok" onclick="setFilter('ok')">&#x2713; Valid 69</button>
+  <button class="filter-btn f-imminent" onclick="setFilter('imminent')">&#x26A0; Imminent 0</button>
+  <button class="filter-btn f-critical" onclick="setFilter('critical')">&#x26A0; Critical 0</button>
+  <button class="filter-btn f-warning" onclick="setFilter('warning')">&#x26A0; Warning 0</button>
+  <button class="filter-btn f-ok" onclick="setFilter('ok')">&#x2713; Valid 121</button>
   <button class="filter-btn f-unmatched" onclick="setFilter('unmatched')">No Target Match</button>
   <div class="search-wrap"><input type="text" id="search" placeholder="Search bundle, target, or org..." oninput="applyFilters()"></div>
 </div>
@@ -114,58 +114,58 @@
 </div>
 <script>
 const CERTS = [
-{"status":"imminent","bundle":"com.hbi.wdtinc.KOB","org":"Hubbard Broadcasting","target":"KOB_universal","expiry":"2026-04-23","days":48},
-{"status":"imminent","bundle":"com.keloland.stormtrack","org":"LIN Television Corporation","target":"KELO_universal","expiry":"2026-04-25","days":51},
-{"status":"imminent","bundle":"com.kxly.KXLYWeather","org":"Evening Telegram Company","target":"KXLY_universal","expiry":"2026-04-25","days":51},
-{"status":"imminent","bundle":"com.mediageneral.wsiwfla1","org":"LIN Television Corporation","target":"WFLA_universal","expiry":"2026-04-25","days":51},
-{"status":"imminent","bundle":"com.wivb.4-Warn-Weather","org":"LIN Television Corporation","target":"WIVB_universal","expiry":"2026-04-25","days":51},
-{"status":"imminent","bundle":"com.newssynergy.ciproudweather","org":"Nexstar Broadcasting","target":"WMBD_universal","expiry":"2026-04-25","days":51},
-{"status":"critical","bundle":"com.mclaughlin.motors","org":"McLaughlin Motors LLC","target":"McLaughlin_universal","expiry":"2026-05-08","days":63},
-{"status":"critical","bundle":"com.young.wricstormtrackerwx","org":"LIN Television Corporation","target":"WRIC_universal","expiry":"2026-05-09","days":65},
-{"status":"critical","bundle":"com.belparkweather.belparkweathernetwork","org":"Belpark Weather Network","target":"Belpark_universal","expiry":"2026-05-09","days":65},
-{"status":"critical","bundle":"com.wdtinc.KOTV","org":"Griffin Television OKC","target":"KOTV_universal","expiry":"2026-05-09","days":65},
-{"status":"critical","bundle":"tv.ktalnews.BaronWeatherApp","org":"Nexstar Broadcasting","target":"KTAL_universal","expiry":"2026-05-09","days":65},
-{"status":"critical","bundle":"com.wdtinc.KWTV","org":"Griffin Television OKC","target":"KWTV_universal","expiry":"2026-05-09","days":65},
-{"status":"critical","bundle":"com.pnsdigital.weather.wdiv","org":"Graham Media Group","target":"WDIV_universal","expiry":"2026-05-09","days":65},
-{"status":"warning","bundle":"com.laubhan.wx","org":"Matt Laubhan Media LLC","target":"matt-laubhan-wx","expiry":"2026-06-04","days":90},
-{"status":"warning","bundle":"com.mc.wx","org":"Mike Collier Weather LLC","target":"MCWX_universal","expiry":"2026-07-05","days":121},
-{"status":"warning","bundle":"com.mediageneral.wsiwcbd","org":"LIN Television Corporation","target":"WCBD_universal","expiry":"2026-07-05","days":122},
-{"status":"warning","bundle":"com.iscnweather","org":"Weather Pros LLC","target":"ISCN_universal","expiry":"2026-07-05","days":122},
-{"status":"warning","bundle":"com.youngmedia.wten","org":"LIN Television Corporation","target":"WTEN_universal","expiry":"2026-07-05","days":122},
-{"status":"warning","bundle":"com.mediageneral.wsiwspa","org":"LIN Television Corporation","target":"WSPA_universal","expiry":"2026-07-05","days":122},
-{"status":"warning","bundle":"com.wood.Storm-Team-8","org":"LIN Television Corporation","target":"WOOD_universal","expiry":"2026-07-05","days":122},
-{"status":"warning","bundle":"com.mattrudkin.wx","org":"Matt Rudkin Weather Consulting","target":"Matt_Rudkin_universal","expiry":"2026-07-09","days":126},
-{"status":"warning","bundle":"com.WKRG.wsi","org":"LIN Television Corporation","target":"WKRG_universal","expiry":"2026-07-11","days":127},
-{"status":"warning","bundle":"com.wjbf.wx","org":"Media General","target":"WJBF_universal","expiry":"2026-07-11","days":127},
-{"status":"warning","bundle":"com.baron.weatherlab","org":"Baron Services","target":"Baron.weatherlab","expiry":"2026-07-11","days":127},
-{"status":"warning","bundle":"com.ktmf.baron.weather","org":"KHQ Incorporated","target":"KTMF_universal","expiry":"2026-07-11","days":127},
-{"status":"warning","bundle":"com.ketk.baron.weather","org":"Nexstar Broadcasting","target":"KETK_universal","expiry":"2026-07-11","days":127},
-{"status":"warning","bundle":"com.grahamdigital.weather.wsls","org":"Graham Media Group","target":"WSLS_universal","expiry":"2026-07-11","days":128},
-{"status":"warning","bundle":"com.pnsdigital.weather.kprc","org":"Graham Media Group","target":"KPRC_universal","expiry":"2026-07-11","days":128},
-{"status":"warning","bundle":"com.pnsdigital.weather.wkmg","org":"Graham Media Group","target":"WKMG_universal","expiry":"2026-07-11","days":128},
-{"status":"warning","bundle":"com.pnsdigital.weather.ksat","org":"Graham Media Group","target":"KSAT_universal","expiry":"2026-07-11","days":128},
-{"status":"warning","bundle":"com.pnsdigital.weather.wjxt","org":"Graham Media Group","target":"WJXT_universal","expiry":"2026-07-11","days":128},
-{"status":"warning","bundle":"com.stubby.wx","org":"BTK Enterprises","target":"Stubbys_universal","expiry":"2026-07-12","days":129},
-{"status":"warning","bundle":"com.futurimedia.zstorm","org":"Futuri Media","target":"Zimmer_universal","expiry":"2026-07-18","days":135},
-{"status":"warning","bundle":"com.awn.wx","org":"The Alabama Weather Network","target":"AWN_universal","expiry":"2026-07-31","days":148},
-{"status":"warning","bundle":"com.wdky.fox56wx","org":"Nexstar Broadcasting","target":"WDKY_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.easttn.wx","org":"eastTNweather LLC","target":"East_TN_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.newssynergy.wmbbweather","org":"Nexstar Broadcasting","target":"WMBB_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.katu.wx","org":"Sinclair Broadcast Group","target":"KATU_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.norcal.weather","org":"Mike Krueger","target":"NorCal_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.wsi.WSIWeatherLiveVIPIR-11","org":"LIN Television Corporation","target":"WJHL_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.wcmh.wx","org":"Media General","target":"WCHM.Wx","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.newssynergy.pahomepageweather","org":"Nexstar Broadcasting","target":"WBRE_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.baronservices.wxworx","org":"Baron Services","target":"Baron.critical","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.wsnj.wx","org":"NorCast Media Group LLC","target":"WSNJ_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.newssynergy.klbkweather","org":"Nexstar Broadcasting","target":"KLBK_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.boknows.wx","org":"Bohdan Cole","target":"BoKnows_universal","expiry":"2026-08-30","days":178},
-{"status":"warning","bundle":"com.laplata.wx","org":"La Plata County Colorado","target":"","expiry":"2026-08-31","days":179},
-{"status":"warning","bundle":"com.canalmeteo.wx","org":"Poniente Media Group LLC","target":"","expiry":"2026-08-31","days":179},
-{"status":"warning","bundle":"com.gulfcoast.wx","org":"Gulf Coast Weather Solutions LLC","target":"GulfCoast_universal","expiry":"2026-09-07","days":185},
-{"status":"warning","bundle":"com.panhandle.wx","org":"Panhandle Weather","target":"Panhandle_universal","expiry":"2026-09-19","days":197},
-{"status":"warning","bundle":"com.foothillsweather","org":"Christopher White","target":"Foothills_Wx_universal","expiry":"2026-09-20","days":198},
-{"status":"warning","bundle":"com.emerson.wx","org":"Emerson Productions LLC","target":"Emerson_Digital_universal","expiry":"2026-09-20","days":199},
+{"status":"ok","bundle":"com.hbi.wdtinc.KOB","org":"Hubbard Broadcasting","target":"KOB_universal","expiry":"2026-04-23","days":48},
+{"status":"ok","bundle":"com.keloland.stormtrack","org":"LIN Television Corporation","target":"KELO_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.kxly.KXLYWeather","org":"Evening Telegram Company","target":"KXLY_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.mediageneral.wsiwfla1","org":"LIN Television Corporation","target":"WFLA_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.wivb.4-Warn-Weather","org":"LIN Television Corporation","target":"WIVB_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.newssynergy.ciproudweather","org":"Nexstar Broadcasting","target":"WMBD_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.mclaughlin.motors","org":"McLaughlin Motors LLC","target":"McLaughlin_universal","expiry":"2026-05-08","days":63},
+{"status":"ok","bundle":"com.young.wricstormtrackerwx","org":"LIN Television Corporation","target":"WRIC_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.belparkweather.belparkweathernetwork","org":"Belpark Weather Network","target":"Belpark_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.wdtinc.KOTV","org":"Griffin Television OKC","target":"KOTV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"tv.ktalnews.BaronWeatherApp","org":"Nexstar Broadcasting","target":"KTAL_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.wdtinc.KWTV","org":"Griffin Television OKC","target":"KWTV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.pnsdigital.weather.wdiv","org":"Graham Media Group","target":"WDIV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.laubhan.wx","org":"Matt Laubhan Media LLC","target":"matt-laubhan-wx","expiry":"2026-06-04","days":90},
+{"status":"ok","bundle":"com.mc.wx","org":"Mike Collier Weather LLC","target":"MCWX_universal","expiry":"2026-07-05","days":121},
+{"status":"ok","bundle":"com.mediageneral.wsiwcbd","org":"LIN Television Corporation","target":"WCBD_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.iscnweather","org":"Weather Pros LLC","target":"ISCN_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.youngmedia.wten","org":"LIN Television Corporation","target":"WTEN_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.mediageneral.wsiwspa","org":"LIN Television Corporation","target":"WSPA_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.wood.Storm-Team-8","org":"LIN Television Corporation","target":"WOOD_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.mattrudkin.wx","org":"Matt Rudkin Weather Consulting","target":"Matt_Rudkin_universal","expiry":"2026-07-09","days":126},
+{"status":"ok","bundle":"com.WKRG.wsi","org":"LIN Television Corporation","target":"WKRG_universal","expiry":"2026-07-11","days":127},
+{"status":"ok","bundle":"com.wjbf.wx","org":"Media General","target":"WJBF_universal","expiry":"2026-07-11","days":127},
+{"status":"ok","bundle":"com.baron.weatherlab","org":"Baron Services","target":"Baron.weatherlab","expiry":"2026-07-11","days":127},
+{"status":"ok","bundle":"com.ktmf.baron.weather","org":"KHQ Incorporated","target":"KTMF_universal","expiry":"2026-07-11","days":127},
+{"status":"ok","bundle":"com.ketk.baron.weather","org":"Nexstar Broadcasting","target":"KETK_universal","expiry":"2026-07-11","days":127},
+{"status":"ok","bundle":"com.grahamdigital.weather.wsls","org":"Graham Media Group","target":"WSLS_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.kprc","org":"Graham Media Group","target":"KPRC_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.wkmg","org":"Graham Media Group","target":"WKMG_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.ksat","org":"Graham Media Group","target":"KSAT_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.wjxt","org":"Graham Media Group","target":"WJXT_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.stubby.wx","org":"BTK Enterprises","target":"Stubbys_universal","expiry":"2026-07-12","days":129},
+{"status":"ok","bundle":"com.futurimedia.zstorm","org":"Futuri Media","target":"Zimmer_universal","expiry":"2026-07-18","days":135},
+{"status":"ok","bundle":"com.awn.wx","org":"The Alabama Weather Network","target":"AWN_universal","expiry":"2026-07-31","days":148},
+{"status":"ok","bundle":"com.wdky.fox56wx","org":"Nexstar Broadcasting","target":"WDKY_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.easttn.wx","org":"eastTNweather LLC","target":"East_TN_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.wmbbweather","org":"Nexstar Broadcasting","target":"WMBB_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.katu.wx","org":"Sinclair Broadcast Group","target":"KATU_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.norcal.weather","org":"Mike Krueger","target":"NorCal_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wsi.WSIWeatherLiveVIPIR-11","org":"LIN Television Corporation","target":"WJHL_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wcmh.wx","org":"Media General","target":"WCHM.Wx","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.pahomepageweather","org":"Nexstar Broadcasting","target":"WBRE_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.baronservices.wxworx","org":"Baron Services","target":"Baron.critical","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wsnj.wx","org":"NorCast Media Group LLC","target":"WSNJ_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.klbkweather","org":"Nexstar Broadcasting","target":"KLBK_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.boknows.wx","org":"Bohdan Cole","target":"BoKnows_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.laplata.wx","org":"La Plata County Colorado","target":"","expiry":"2026-08-31","days":179},
+{"status":"ok","bundle":"com.canalmeteo.wx","org":"Poniente Media Group LLC","target":"","expiry":"2026-08-31","days":179},
+{"status":"ok","bundle":"com.gulfcoast.wx","org":"Gulf Coast Weather Solutions LLC","target":"GulfCoast_universal","expiry":"2026-09-07","days":185},
+{"status":"ok","bundle":"com.panhandle.wx","org":"Panhandle Weather","target":"Panhandle_universal","expiry":"2026-09-19","days":197},
+{"status":"ok","bundle":"com.foothillsweather","org":"Christopher White","target":"Foothills_Wx_universal","expiry":"2026-09-20","days":198},
+{"status":"ok","bundle":"com.emerson.wx","org":"Emerson Productions LLC","target":"Emerson_Digital_universal","expiry":"2026-09-20","days":199},
 {"status":"ok","bundle":"com.nickhausen.wx","org":"Nicholas Holdinghausen","target":"Nick_Hausen_universal","expiry":"2026-10-04","days":213},
 {"status":"ok","bundle":"com.hutch.wx","org":"Hutch Johnson","target":"Hutch.Wx","expiry":"2026-10-15","days":224},
 {"status":"ok","bundle":"com.southerntnweather.weather","org":"Elijah Kirby","target":"South_TN_Wx","expiry":"2026-10-15","days":224},
