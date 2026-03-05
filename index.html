@@ -75,19 +75,19 @@
     <h1>Push Certificate Monitor</h1>
     <div class="subtitle">Apple Push Services &mdash; Keychain vs MOB-225 Targets &mdash; Imminent &le;7d &bull; Critical &le;14d &bull; Warning &le;30d</div>
   </div>
-  <div class="generated">Generated 2026-03-05 17:01 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
+  <div class="generated">Generated 2026-03-05 17:06 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
 </header>
 <div class="summary">
-  <div class="stat-card total"><div class="num">138</div><div class="label">Total Certs</div></div>
-  <div class="stat-card" style="border-color:#991b1b"><div class="num" style="color:#ef4444">17</div><div class="label">Expired</div></div>
+  <div class="stat-card total"><div class="num">121</div><div class="label">Total Certs</div></div>
+  <div class="stat-card" style="border-color:#991b1b"><div class="num" style="color:#ef4444">0</div><div class="label">Expired</div></div>
   <div class="stat-card" style="border-color:#7c2d12"><div class="num" style="color:#f97316">0</div><div class="label">Imminent (&le;7 days)</div></div>
   <div class="stat-card critical-card"><div class="num">0</div><div class="label">Critical (&le;14 days)</div></div>
   <div class="stat-card warning-card"><div class="num">0</div><div class="label">Warning (&le;30 days)</div></div>
   <div class="stat-card ok-card"><div class="num">121</div><div class="label">Valid</div></div>
 </div>
 <div class="controls">
-  <button class="filter-btn f-all active" onclick="setFilter('all')">All 138</button>
-  <button class="filter-btn f-expired" onclick="setFilter('expired')">&#x2717; Expired 17</button>
+  <button class="filter-btn f-all active" onclick="setFilter('all')">All 121</button>
+  <button class="filter-btn f-expired" onclick="setFilter('expired')">&#x2717; Expired 0</button>
   <button class="filter-btn f-imminent" onclick="setFilter('imminent')">&#x26A0; Imminent 0</button>
   <button class="filter-btn f-critical" onclick="setFilter('critical')">&#x26A0; Critical 0</button>
   <button class="filter-btn f-warning" onclick="setFilter('warning')">&#x26A0; Warning 0</button>
@@ -95,7 +95,7 @@
   <button class="filter-btn f-unmatched" onclick="setFilter('unmatched')">No Target Match</button>
   <div class="search-wrap"><input type="text" id="search" placeholder="Search bundle, target, or org..." oninput="applyFilters()"></div>
 </div>
-<div class="count-label" id="count-label">Showing 138 certificates</div>
+<div class="count-label" id="count-label">Showing 121 certificates</div>
 <div class="table-wrap">
 <table id="cert-table">
 <thead>
@@ -114,23 +114,6 @@
 </div>
 <script>
 const CERTS = [
-{"status":"expired","bundle":"com.tds.wx","org":"Thermodynamic Solutions LLC","target":"TDS_universal","expiry":"2025-04-26","days":-313},
-{"status":"expired","bundle":"com.pnsdigital.weather.ent.wjxt","org":"Graham Media Group","target":"","expiry":"2025-07-05","days":-243},
-{"status":"expired","bundle":"com.baronservices.unimet.Test-Widget","org":"Baron Services","target":"","expiry":"2025-07-18","days":-230},
-{"status":"expired","bundle":"com.bigriverbroadcasting.kix96wx","org":"Nick Martin","target":"KIX96_universal","expiry":"2025-07-19","days":-229},
-{"status":"expired","bundle":"com.bigriverbroadcasting.q107wx","org":"Nick Martin","target":"Q107_universal","expiry":"2025-07-19","days":-229},
-{"status":"expired","bundle":"com.justhurricanes.hou.app","org":"Graham Media Group","target":"","expiry":"2025-07-20","days":-228},
-{"status":"expired","bundle":"com.justhurricanes.ant.app","org":"Graham Media Group","target":"","expiry":"2025-07-20","days":-228},
-{"status":"expired","bundle":"com.justhurricanes.jax","org":"Graham Media Group","target":"","expiry":"2025-07-20","days":-228},
-{"status":"expired","bundle":"com.justhurricanes.orl.app","org":"Graham Media Group","target":"","expiry":"2025-07-20","days":-228},
-{"status":"expired","bundle":"com.CaptainAccurate","org":"David Aldrich","target":"Captain_Accurate","expiry":"2025-11-20","days":-106},
-{"status":"expired","bundle":"com.newssynergy.wboy","org":"Nexstar Broadcasting","target":"","expiry":"2025-12-14","days":-81},
-{"status":"expired","bundle":"com.griffin.tunekast1849","org":"Griffin Television OKC","target":"","expiry":"2026-02-13","days":-21},
-{"status":"expired","bundle":"com.griffin.tunekast1847","org":"Griffin Television OKC","target":"","expiry":"2026-02-13","days":-21},
-{"status":"expired","bundle":"com.griffin.tunekast1848","org":"Griffin Television OKC","target":"","expiry":"2026-02-13","days":-21},
-{"status":"expired","bundle":"com.griffin.tunekast1846","org":"Griffin Television OKC","target":"","expiry":"2026-02-13","days":-20},
-{"status":"expired","bundle":"com.griffin.tunekast1850","org":"Griffin Television OKC","target":"","expiry":"2026-02-13","days":-20},
-{"status":"expired","bundle":"com.nebraskawx.tv","org":"Timothy Jones","target":"NebraskaWx_universal","expiry":"2026-02-23","days":-10},
 {"status":"ok","bundle":"com.hbi.wdtinc.KOB","org":"Hubbard Broadcasting","target":"KOB_universal","expiry":"2026-04-23","days":48},
 {"status":"ok","bundle":"com.keloland.stormtrack","org":"LIN Television Corporation","target":"KELO_universal","expiry":"2026-04-25","days":51},
 {"status":"ok","bundle":"com.kxly.KXLYWeather","org":"Evening Telegram Company","target":"KXLY_universal","expiry":"2026-04-25","days":51},
