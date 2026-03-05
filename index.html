@@ -91,11 +91,11 @@
     <h1>Push Certificate Monitor</h1>
     <div class="subtitle">Apple Push Services &mdash; Keychain vs MOB-225 Targets &mdash; Imminent &le;7d &bull; Critical &le;14d &bull; Warning &le;30d</div>
   </div>
-  <div class="generated">Generated 2026-03-05 19:50 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
+  <div class="generated">Generated 2026-03-05 20:10 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
 </header>
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('ios')" id="tab-btn-ios">iOS Push Certs <span style="background:#1e1f3a;color:#818cf8;border-radius:10px;padding:1px 8px;font-size:0.75rem;margin-left:6px;">121</span></button>
-  <button class="tab-btn" onclick="switchTab('android')" id="tab-btn-android">Android Apps <span style="background:#1e1f3a;color:#818cf8;border-radius:10px;padding:1px 8px;font-size:0.75rem;margin-left:6px;">121</span></button>
+  <button class="tab-btn" onclick="switchTab('android')" id="tab-btn-android">Android Apps <span style="background:#1e1f3a;color:#818cf8;border-radius:10px;padding:1px 8px;font-size:0.75rem;margin-left:6px;">104</span></button>
 </div>
 
 <div id="tab-ios" class="tab-pane active">
@@ -141,7 +141,7 @@
 <div class="controls">
   <div class="search-wrap" style="margin-left:0"><input type="text" id="android-search" placeholder="Search bundle ID or app name..." oninput="applyAndroidFilters()"></div>
 </div>
-<div class="count-label" id="android-count-label">Showing 121 apps</div>
+<div class="count-label" id="android-count-label">Showing 104 apps</div>
 <div class="table-wrap">
 <table id="android-table">
 <thead>
@@ -204,15 +204,15 @@ const CERTS = [
 {"status":"ok","bundle":"com.newssynergy.pahomepageweather","org":"Nexstar Broadcasting","target":"WBRE_universal","expiry":"2026-08-30","days":177,"appname":"28/22 Future Alert WBRE/WYOU","version":"7.0.0","updated":"2025-08-13"},
 {"status":"ok","bundle":"com.wsnj.wx","org":"NorCast Media Group LLC","target":"WSNJ_universal","expiry":"2026-08-30","days":177,"appname":"NorCast Weather","version":"6.9.0","updated":"2024-10-24"},
 {"status":"ok","bundle":"com.newssynergy.klbkweather","org":"Nexstar Broadcasting","target":"KLBK_universal","expiry":"2026-08-30","days":177,"appname":"EverythingLubbock Weather","version":"7.0.1","updated":"2025-07-15"},
+{"status":"ok","bundle":"com.boknows.wx","org":"Bohdan Cole","target":"BoKnows_universal","expiry":"2026-08-30","days":177,"appname":"","version":"","updated":""},
 {"status":"ok","bundle":"com.norcal.weather","org":"Mike Krueger","target":"NorCal_universal","expiry":"2026-08-30","days":178,"appname":"Weather NorCal","version":"7.0.2","updated":"2026-02-06"},
 {"status":"ok","bundle":"com.laplata.wx","org":"La Plata County Colorado","target":"","expiry":"2026-08-31","days":178,"appname":"La Plata County Weather Radar","version":"6.9.3","updated":"2024-10-16"},
 {"status":"ok","bundle":"com.baronservices.wxworx","org":"Baron Services","target":"Baron.critical","expiry":"2026-08-30","days":178,"appname":"Baron Critical Weather","version":"6.9.0","updated":"2023-12-13"},
-{"status":"ok","bundle":"com.boknows.wx","org":"Bohdan Cole","target":"BoKnows_universal","expiry":"2026-08-30","days":178,"appname":"","version":"","updated":""},
 {"status":"ok","bundle":"com.canalmeteo.wx","org":"Poniente Media Group LLC","target":"","expiry":"2026-08-31","days":178,"appname":"Canal Meteo","version":"7.0.4","updated":"2026-02-19"},
 {"status":"ok","bundle":"com.gulfcoast.wx","org":"Gulf Coast Weather Solutions LLC","target":"GulfCoast_universal","expiry":"2026-09-07","days":185,"appname":"Gulf Coast Weather Solutions","version":"7.0.7","updated":"2026-02-03"},
 {"status":"ok","bundle":"com.panhandle.wx","org":"Panhandle Weather","target":"Panhandle_universal","expiry":"2026-09-19","days":197,"appname":"Panhandle Weather App","version":"7.0.4","updated":"2026-01-07"},
 {"status":"ok","bundle":"com.foothillsweather","org":"Christopher White","target":"Foothills_Wx_universal","expiry":"2026-09-20","days":198,"appname":"Foothills Weather","version":"6.9.0","updated":"2023-12-19"},
-{"status":"ok","bundle":"com.emerson.wx","org":"Emerson Productions LLC","target":"Emerson_Digital_universal","expiry":"2026-09-20","days":199,"appname":"The Digital Weather Desk","version":"7.0.2","updated":"2025-10-17"},
+{"status":"ok","bundle":"com.emerson.wx","org":"Emerson Productions LLC","target":"Emerson_Digital_universal","expiry":"2026-09-20","days":198,"appname":"The Digital Weather Desk","version":"7.0.2","updated":"2025-10-17"},
 {"status":"ok","bundle":"com.nickhausen.wx","org":"Nicholas Holdinghausen","target":"Nick_Hausen_universal","expiry":"2026-10-04","days":213,"appname":"Nick Hausen Weather","version":"7.0.0","updated":"2025-09-06"},
 {"status":"ok","bundle":"com.hutch.wx","org":"Hutch Johnson","target":"Hutch.Wx","expiry":"2026-10-15","days":223,"appname":"Hutch's Weather","version":"7.0.2","updated":"2025-12-02"},
 {"status":"ok","bundle":"com.southerntnweather.weather","org":"Elijah Kirby","target":"South_TN_Wx","expiry":"2026-10-15","days":223,"appname":"Southern Tennessee Weather","version":"7.0.1","updated":"2025-12-22"},
@@ -367,22 +367,17 @@ const ANDROID = [
 {"bundle":"com.arkansas.weather","appname":"Arkansas Wx Network","version":"6.7.1.5","developer":"Arkansas Weather Network LLC","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.arkansas.weather&hl=en"},
 {"bundle":"com.auburn.com","appname":"Auburn Weather","version":"6.7.1.3","developer":"Auburn University","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.auburn.com&hl=en"},
 {"bundle":"com.awn.wx","appname":"AWN","version":"6.7.1.6","developer":"Alabama Weather Network","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.awn.wx&hl=en"},
-{"bundle":"com.baron.madisoncounty","appname":"Alerting","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.baron.madisoncounty&hl=en"},
 {"bundle":"com.baron.wboy.wboystormtracker12","appname":"WBOY Storm","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baron.wboy.wboystormtracker12&hl=en"},
-{"bundle":"com.baron.graylynx","appname":"Weather Lab","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.baron.graylynx&hl=en"},
+{"bundle":"com.baron.weatherlab","appname":"Weather Lab","version":"6.7.1.1303","developer":"Baron Weather","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baron.weatherlab&hl=en"},
 {"bundle":"com.baron.wowk.wowkstormtracker13","appname":"WOWK Storm","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baron.wowk.wowkstormtracker13&hl=en"},
-{"bundle":"com.baron.wtrf.wtrftormtracker7","appname":"WTRF Storm","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.baron.wtrf.wtrftormtracker7&hl=en"},
+{"bundle":"com.baron.wtrf.wtrfstormtracker7","appname":"WTRF Storm","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baron.wtrf.wtrfstormtracker7&hl=en"},
 {"bundle":"com.baron.wvns.wvnstormtracker59","appname":"WVNS Storm","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baron.wvns.wvnstormtracker59&hl=en"},
 {"bundle":"com.baronservices.mobilemet.kelo","appname":"KELO Wx","version":"6.7.1.1302","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baronservices.mobilemet.kelo&hl=en"},
-{"bundle":"com.baronservices.mobilemet.nbc2","appname":"NBC2 Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.baronservices.mobilemet.nbc2&hl=en"},
 {"bundle":"com.baronservices.tnvalleyweather","appname":"TNValleyWx","version":"6.7.1.1302","developer":"Ben Luna","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.baronservices.tnvalleyweather&hl=en"},
-{"bundle":"com.baynews9.baynews9plus","appname":"Spectrum BN9","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.baynews9.baynews9plus&hl=en"},
 {"bundle":"com.belparkweather.belparkweathernetwork","appname":"ONW","version":"6.8.1302","developer":"Belpark Weather Network","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.belparkweather.belparkweathernetwork&hl=en"},
 {"bundle":"com.bigriverbroadcasting.kix96wx","appname":"KixWeather","version":"6.7.1.1301","developer":"Big River Broadcasting","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.bigriverbroadcasting.kix96wx&hl=en"},
 {"bundle":"com.bigriverbroadcasting.q107wx","appname":"WeatherOnQ","version":"6.7.1.1200","developer":"Big River Broadcasting","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.bigriverbroadcasting.q107wx&hl=en"},
-{"bundle":"com.boknows.weather","appname":"Bo Knows Weather","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.boknows.weather&hl=en"},
 {"bundle":"com.canalmeteo.wx","appname":"Canal Meteo TV","version":"6.7.1.6","developer":"Canal Meteo","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.canalmeteo.wx&hl=en"},
-{"bundle":"com.captainaccurate","appname":"CaptAccuWx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.captainaccurate&hl=en"},
 {"bundle":"com.centralla.wx","appname":"CenLa Weather","version":"6.7.1.1301","developer":"Cenla Weather","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.centralla.wx&hl=en"},
 {"bundle":"com.doapps.android.mln.wthr_weather","appname":"WTHR Weather","version":"5.0.7000000","developer":"Video Indiana, Inc","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.doapps.android.mln.wthr_weather&hl=en"},
 {"bundle":"com.dougheady.wx","appname":"Doug Heady Wx","version":"6.7.1.5","developer":"Doug Heady Weather","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.dougheady.wx&hl=en"},
@@ -401,7 +396,6 @@ const ANDROID = [
 {"bundle":"com.ketk.android.baron.weather","appname":"Storm Team","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.ketk.android.baron.weather&hl=en"},
 {"bundle":"com.keyt.android.weather","appname":"FirstAlert WX","version":"5.0.1300","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.keyt.android.weather&hl=en"},
 {"bundle":"com.kgbt.android.weather","appname":"ValleyStormTeam","version":"6.7.1.700000000","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.kgbt.android.weather&hl=en"},
-{"bundle":"com.kion2.android.weather","appname":"KION Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.kion2.android.weather&hl=en"},
 {"bundle":"com.kmiz.android.weather","appname":"KMIZ Wx","version":"6.7.1.1302","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.kmiz.android.weather&hl=en"},
 {"bundle":"com.knpn.weatherapp","appname":"NP Weather","version":"6.7.1.1300","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.knpn.weatherapp&hl=en"},
 {"bundle":"com.krdo.android.weather","appname":"KRDO Wx","version":"5.0.1300","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.krdo.android.weather&hl=en"},
@@ -414,8 +408,7 @@ const ANDROID = [
 {"bundle":"com.kvew.wx","appname":"AVNN Weather","version":"6.7.1.1301","developer":"Evening Telegram Company","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.kvew.wx&hl=en"},
 {"bundle":"com.kvia.android.weather","appname":"KVIA WX","version":"6.7.1.1302","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.kvia.android.weather&hl=en"},
 {"bundle":"com.kxly.android.weather","appname":"KXLY Weather","version":"6.7.1.700000000","developer":"Evening Telegram Company","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.kxly.android.weather&hl=en"},
-{"bundle":"com.laplata.wx","appname":"La Plata Weather","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.laplata.wx&hl=en"},
-{"bundle":"com.laplata.wx","appname":"La Plata Radar","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.laplata.wx&hl=en"},
+{"bundle":"com.laplata.wxradar","appname":"La Plata Radar","version":"6.7.1.1300","developer":"La Plata County Radar","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.laplata.wxradar&hl=en"},
 {"bundle":"com.localnews8.weatherapp","appname":"FirstAlert","version":"6.7.1.1301","developer":"News-Press u0026 Gazette Co.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.localnews8.weatherapp&hl=en"},
 {"bundle":"com.localtvllc.livealert19","appname":"Live Alert 19","version":"5.0.7000001","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.localtvllc.livealert19&hl=en"},
 {"bundle":"com.mattrudkin.wx","appname":"Matt Rudkin WX","version":"6.7.1.1302","developer":"Matthew Rudkin","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.mattrudkin.wx&hl=en"},
@@ -423,7 +416,6 @@ const ANDROID = [
 {"bundle":"com.mobiquityinc.uf_florida_storms_android","appname":"Florida Storms","version":"6.7.1.1300","developer":"Univ of Florida","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.mobiquityinc.uf_florida_storms_android&hl=en"},
 {"bundle":"com.mt.wx","appname":"Montana Wx","version":"6.7.1.1300","developer":"KHQ, Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.mt.wx&hl=en"},
 {"bundle":"com.nebraskawx.tv","appname":"Nebraska Wx","version":"2.0","developer":"Nebraska Weather TV","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.nebraskawx.tv&hl=en"},
-{"bundle":"com.news13.news13plus","appname":"Spectrum N13","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.news13.news13plus&hl=en"},
 {"bundle":"com.newssynergy.centralpaweather","appname":"WTAJ Weather","version":"6.7.1.700000000","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.newssynergy.centralpaweather&hl=en"},
 {"bundle":"com.newssynergy.ciproudweather","appname":"CIProud WX","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.newssynergy.ciproudweather&hl=en"},
 {"bundle":"com.newssynergy.fourstatesweather","appname":"KSNFKODEWx","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.newssynergy.fourstatesweather&hl=en"},
@@ -439,24 +431,21 @@ const ANDROID = [
 {"bundle":"com.pnsdigital.weather.wdiv","appname":"4Warn Weather","version":"6.20.1.1305","developer":"Graham Media Group","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.pnsdigital.weather.wdiv&hl=en"},
 {"bundle":"com.pnsdigital.weather.wjxt","appname":"N4J Weather","version":"6.20.1.1305","developer":"Graham Media Group","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.pnsdigital.weather.wjxt&hl=en"},
 {"bundle":"com.pnsdigital.weather.wkmg","appname":"News 6 Weather","version":"6.20.1.1305","developer":"Graham Media Group","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.pnsdigital.weather.wkmg&hl=en"},
-{"bundle":"com.redfcu.weatherapp","appname":"RFCU","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.redfcu.weatherapp&hl=en"},
 {"bundle":"com.snjtoday.weatherapp","appname":"NorCast","version":"6.7.1.1300","developer":"NorCast Media Group","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.snjtoday.weatherapp&hl=en"},
 {"bundle":"com.southerntnweather.weather","appname":"South TN Weather","version":"6.7.1.2","developer":"Southern Tennessee Media, LLC","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.southerntnweather.weather&hl=en"},
 {"bundle":"com.stubby.wx","appname":"StubbysWX","version":"6.7.1.4","developer":"Stubbyu0027s Weather Center","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.stubby.wx&hl=en"},
 {"bundle":"com.tds.wx","appname":"TDS Weather","version":"6.7.1.1205","developer":"TDS Weather","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.tds.wx&hl=en"},
-{"bundle":"com.tennesseevalleynow","appname":"TNVALERTS","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.tennesseevalleynow&hl=en"},
 {"bundle":"com.thecajunnavy.wx","appname":"The Cajun Navy","version":"6.7.1.1300","developer":"United Cajun Navy","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.thecajunnavy.wx&hl=en"},
 {"bundle":"com.tuttle.wx","appname":"ATsWeather","version":"6.7.1.1302","developer":"Aaron Tuttle","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.tuttle.wx&hl=en"},
 {"bundle":"com.wcbd.android.weather","appname":"Storm Team 2","version":"6.7.1.700000000","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wcbd.android.weather&hl=en"},
 {"bundle":"com.wcmh.wx","appname":"WCMH","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wcmh.wx&hl=en"},
 {"bundle":"com.wdky.fox56wx","appname":"FOX 56 Weather","version":"6.7.1.1302","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wdky.fox56wx&hl=en"},
 {"bundle":"com.wdtinc.android.KOTV","appname":"6 Weather","version":"6.7.1.1304","developer":"Griffin Media, L.L.C.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wdtinc.android.KOTV&hl=en"},
-{"bundle":"com.news9.weather","appname":"News 9 Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.news9.weather&hl=en"},
+{"bundle":"com.wdtinc.android.KWTV","appname":"News 9 Wx","version":"6.7.1.1304","developer":"Griffin Media, L.L.C.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wdtinc.android.KWTV&hl=en"},
 {"bundle":"com.wevv.apps.android","appname":"44News","version":"6.1.602","developer":"Allen Media Broadcasting","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wevv.apps.android&hl=en"},
-{"bundle":"com.wfla.android.weather","appname":"WFLA Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wfla.android.weather&hl=en"},
+{"bundle":"com.wfila.android.weather","appname":"WFLA Wx","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wfila.android.weather&hl=en"},
 {"bundle":"com.wgmbweather","appname":"LA 1st Weather","version":"6.7.1.1301","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wgmbweather&hl=en"},
-{"bundle":"com.whnt.weather","appname":"WHNT SAF-T-Net","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.whnt.weather&hl=en"},
-{"bundle":"com.wish.android.weather","appname":"WISH-TV Storm Track 8 Weather","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wish.android.weather&hl=en"},
+{"bundle":"com.wish8tv.android.weatherapp","appname":"WISH-TV Storm Track 8 Weather","version":"6.7.1.1302","developer":"Circle City Broadcasting 2024","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wish8tv.android.weatherapp&hl=en"},
 {"bundle":"com.wivb.android.weather","appname":"4Warn Weather","version":"6.7.1.600000036","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wivb.android.weather&hl=en"},
 {"bundle":"com.wjbf.wx","appname":"WJBFVipir6","version":"6.7.1.1300","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wjbf.wx&hl=en"},
 {"bundle":"com.wjhl.android.weather","appname":"WJHL Weather","version":"6.7.1.700000000","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wjhl.android.weather&hl=en"},
@@ -471,16 +460,10 @@ const ANDROID = [
 {"bundle":"com.wsav.android.weather","appname":"WSAV Weather Now","version":"6.7.1.600000031","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wsav.android.weather&hl=en"},
 {"bundle":"com.wspa.android.weather","appname":"WSPA Weather","version":"6.7.1.700000000","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wspa.android.weather&hl=en"},
 {"bundle":"com.wten.weather","appname":"WTEN Weather","version":"6.7.1.1160","developer":"Nexstar Inc.","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wten.weather&hl=en"},
-{"bundle":"com.wtvg.abc13radar","appname":"13abc Radar","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wtvg.abc13radar&hl=en"},
 {"bundle":"com.wtvq.weather","appname":"ABC36WX","version":"6.7.1.1302","developer":"ChartLocal","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wtvq.weather&hl=en"},
 {"bundle":"com.wway.android.weather","appname":"StormTrack3","version":"6.7.1.700000000","developer":"ChartLocal","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wway.android.weather&hl=en"},
-{"bundle":"com.wwic.weather","appname":"WWIC Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wwic.weather&hl=en"},
 {"bundle":"com.wwtv.android.weather","appname":"9&10 Weather","version":"6.7.1.700000001","developer":"910 Media Group Web Apps","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wwtv.android.weather&hl=en"},
-{"bundle":"com.wxworx.weather","appname":"Critical Weather","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wxworx.weather&hl=en"},
 {"bundle":"com.wxxv.android.weather","appname":"WXXV25Weather","version":"6.7.1.700000001","developer":"ChartLocal","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=com.wxxv.android.weather&hl=en"},
-{"bundle":"com.wzdx.android.baron.weather","appname":"WZDX Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.wzdx.android.baron.weather&hl=en"},
-{"bundle":"com.zolomedia.centraloregondaily","appname":"CODaily","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=com.zolomedia.centraloregondaily&hl=en"},
-{"bundle":"net.water.id3045","appname":"ABC7 Wx","version":"","developer":"","play_status":"not_found","play_url":"https://play.google.com/store/apps/details?id=net.water.id3045&hl=en"},
 {"bundle":"stormhunterweather.android","appname":"Storm Hunter WX","version":"6.7.1.1300","developer":"John McLaughlin Meteorologist","play_status":"published","play_url":"https://play.google.com/store/apps/details?id=stormhunterweather.android&hl=en"}
 ];
 let androidSort = {col: 'appname', dir: 1};
