@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Push Certificate Monitor</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+  header { background: #1a1d27; border-bottom: 1px solid #2d3148; padding: 20px 32px; display: flex; align-items: center; gap: 16px; }
+  header h1 { font-size: 1.4rem; font-weight: 600; color: #fff; }
+  header .subtitle { font-size: 0.85rem; color: #7c83a0; margin-top: 2px; }
+  .generated { margin-left: auto; font-size: 0.8rem; color: #555d7a; text-align: right; line-height: 1.6; }
+  .summary { display: flex; gap: 16px; padding: 24px 32px; flex-wrap: wrap; }
+  .stat-card { background: #1a1d27; border: 1px solid #2d3148; border-radius: 10px; padding: 16px 24px; flex: 1; min-width: 140px; text-align: center; }
+  .stat-card .num { font-size: 2.2rem; font-weight: 700; line-height: 1; }
+  .stat-card .label { font-size: 0.78rem; color: #7c83a0; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card.total .num { color: #e2e8f0; }
+  .stat-card.expired-card .num { color: #64748b; }
+  .stat-card.critical-card .num { color: #f87171; }
+  .stat-card.warning-card .num { color: #fbbf24; }
+  .stat-card.ok-card .num { color: #34d399; }
+  .controls { display: flex; gap: 12px; padding: 0 32px 16px; flex-wrap: wrap; align-items: center; }
+  .filter-btn { background: #1a1d27; border: 1px solid #2d3148; color: #9ca3af; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; }
+  .filter-btn:hover { border-color: #4f5680; color: #e2e8f0; }
+  .filter-btn.f-all.active { border-color: #6366f1; background: #1e1f3a; color: #818cf8; }
+  .filter-btn.f-critical.active { border-color: #f87171; background: #2a1515; color: #f87171; }
+  .filter-btn.f-warning.active { border-color: #fbbf24; background: #2a2212; color: #fbbf24; }
+  .filter-btn.f-ok.active { border-color: #34d399; background: #0f2a20; color: #34d399; }
+  .filter-btn.f-expired.active { border-color: #475569; background: #1a1f2a; color: #94a3b8; }
+  .filter-btn.f-unmatched.active { border-color: #a78bfa; background: #1e1a2a; color: #a78bfa; }
+  .search-wrap { margin-left: auto; }
+  .search-wrap input { background: #1a1d27; border: 1px solid #2d3148; color: #e2e8f0; padding: 7px 14px; border-radius: 6px; font-size: 0.85rem; width: 300px; outline: none; }
+  .search-wrap input:focus { border-color: #4f5680; }
+  .search-wrap input::placeholder { color: #4a5168; }
+  .table-wrap { padding: 0 32px 32px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  thead tr { border-bottom: 1px solid #2d3148; }
+  th { padding: 10px 14px; text-align: left; font-weight: 500; color: #7c83a0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; user-select: none; white-space: nowrap; }
+  th:hover { color: #a0a8c0; }
+  th .sort-arrow { margin-left: 4px; opacity: 0.4; font-size: 0.7rem; }
+  th.sorted .sort-arrow { opacity: 1; color: #6366f1; }
+  tbody tr { border-bottom: 1px solid #1e2133; transition: background 0.1s; }
+  tbody tr:hover { background: #1a1d2a; }
+  td { padding: 11px 14px; vertical-align: middle; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .badge.expired { background: #1e2433; color: #64748b; border: 1px solid #374151; }
+  .badge.critical { background: #2a1515; color: #f87171; border: 1px solid #7f1d1d; }
+  .badge.warning { background: #2a2210; color: #fbbf24; border: 1px solid #78350f; }
+  .badge.ok { background: #0d2218; color: #34d399; border: 1px solid #065f46; }
+  .badge.unknown { background: #1e1e1e; color: #6b7280; border: 1px solid #374151; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .bundle-id { font-family: "SF Mono", "Fira Code", monospace; color: #a5b4fc; font-size: 0.82rem; }
+  .target-name { font-family: "SF Mono", "Fira Code", monospace; color: #e2e8f0; font-size: 0.82rem; font-weight: 500; }
+  .target-none { color: #374151; font-style: italic; font-size: 0.8rem; }
+  .org-name { color: #94a3b8; }
+  .days-cell { font-weight: 600; }
+  .days-cell.expired { color: #475569; }
+  .days-cell.critical { color: #f87171; }
+  .days-cell.warning { color: #fbbf24; }
+  .days-cell.ok { color: #34d399; }
+  .expiry-date { white-space: nowrap; color: #94a3b8; }
+  .count-label { color: #4a5168; font-size: 0.8rem; padding: 0 32px 12px; }
+  .hidden { display: none; }
+  .no-results { text-align: center; padding: 48px; color: #4a5168; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Push Certificate Monitor</h1>
+    <div class="subtitle">Apple Push Services &mdash; Keychain vs MOB-225 Targets &mdash; Critical &le;14 days &bull; Warning &le;30 days</div>
+  </div>
+  <div class="generated">Generated 2026-03-05 14:03 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
+</header>
+<div class="summary">
+  <div class="stat-card total"><div class="num">121</div><div class="label">Total Certs</div></div>
+  <div class="stat-card critical-card"><div class="num">0</div><div class="label">Critical (&le;14 days)</div></div>
+  <div class="stat-card warning-card"><div class="num">0</div><div class="label">Warning (&le;30 days)</div></div>
+  <div class="stat-card ok-card"><div class="num">121</div><div class="label">Valid</div></div>
+</div>
+<div class="controls">
+  <button class="filter-btn f-all active" onclick="setFilter('all')">All 121</button>
+  <button class="filter-btn f-critical" onclick="setFilter('critical')">&#x26A0; Critical 0</button>
+  <button class="filter-btn f-warning" onclick="setFilter('warning')">&#x26A0; Warning 0</button>
+  <button class="filter-btn f-ok" onclick="setFilter('ok')">&#x2713; Valid 121</button>
+  <button class="filter-btn f-unmatched" onclick="setFilter('unmatched')">No Target Match</button>
+  <div class="search-wrap"><input type="text" id="search" placeholder="Search bundle, target, or org..." oninput="applyFilters()"></div>
+</div>
+<div class="count-label" id="count-label">Showing 121 certificates</div>
+<div class="table-wrap">
+<table id="cert-table">
+<thead>
+<tr>
+  <th onclick="sortBy('status')">Status <span class="sort-arrow">&#x25B4;</span></th>
+  <th onclick="sortBy('target')">Target <span class="sort-arrow">&#x25B4;</span></th>
+  <th onclick="sortBy('bundle')">Bundle ID <span class="sort-arrow">&#x25B4;</span></th>
+  <th onclick="sortBy('org')">Organization <span class="sort-arrow">&#x25B4;</span></th>
+  <th onclick="sortBy('expiry')">Expiry Date <span class="sort-arrow">&#x25B4;</span></th>
+  <th onclick="sortBy('days')">Days Left <span class="sort-arrow">&#x25B4;</span></th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+<div class="no-results hidden" id="no-results">No certificates match your filter.</div>
+</div>
+<script>
+const CERTS = [
+{"status":"ok","bundle":"com.hbi.wdtinc.KOB","org":"Hubbard Broadcasting","target":"KOB_universal","expiry":"2026-04-23","days":49},
+{"status":"ok","bundle":"com.keloland.stormtrack","org":"LIN Television Corporation","target":"KELO_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.kxly.KXLYWeather","org":"Evening Telegram Company","target":"KXLY_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.mediageneral.wsiwfla1","org":"LIN Television Corporation","target":"WFLA_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.wivb.4-Warn-Weather","org":"LIN Television Corporation","target":"WIVB_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.newssynergy.ciproudweather","org":"Nexstar Broadcasting","target":"WMBD_universal","expiry":"2026-04-25","days":51},
+{"status":"ok","bundle":"com.mclaughlin.motors","org":"McLaughlin Motors LLC","target":"McLaughlin_universal","expiry":"2026-05-08","days":64},
+{"status":"ok","bundle":"com.young.wricstormtrackerwx","org":"LIN Television Corporation","target":"WRIC_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.belparkweather.belparkweathernetwork","org":"Belpark Weather Network","target":"Belpark_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.wdtinc.KOTV","org":"Griffin Television OKC","target":"KOTV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"tv.ktalnews.BaronWeatherApp","org":"Nexstar Broadcasting","target":"KTAL_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.wdtinc.KWTV","org":"Griffin Television OKC","target":"KWTV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.pnsdigital.weather.wdiv","org":"Graham Media Group","target":"WDIV_universal","expiry":"2026-05-09","days":65},
+{"status":"ok","bundle":"com.laubhan.wx","org":"Matt Laubhan Media LLC","target":"matt-laubhan-wx","expiry":"2026-06-04","days":91},
+{"status":"ok","bundle":"com.mc.wx","org":"Mike Collier Weather LLC","target":"MCWX_universal","expiry":"2026-07-05","days":121},
+{"status":"ok","bundle":"com.mediageneral.wsiwcbd","org":"LIN Television Corporation","target":"WCBD_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.iscnweather","org":"Weather Pros LLC","target":"ISCN_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.youngmedia.wten","org":"LIN Television Corporation","target":"WTEN_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.mediageneral.wsiwspa","org":"LIN Television Corporation","target":"WSPA_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.wood.Storm-Team-8","org":"LIN Television Corporation","target":"WOOD_universal","expiry":"2026-07-05","days":122},
+{"status":"ok","bundle":"com.mattrudkin.wx","org":"Matt Rudkin Weather Consulting","target":"Matt_Rudkin_universal","expiry":"2026-07-09","days":126},
+{"status":"ok","bundle":"com.WKRG.wsi","org":"LIN Television Corporation","target":"WKRG_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.wjbf.wx","org":"Media General","target":"WJBF_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.baron.weatherlab","org":"Baron Services","target":"Baron.weatherlab","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.ktmf.baron.weather","org":"KHQ Incorporated","target":"KTMF_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.ketk.baron.weather","org":"Nexstar Broadcasting","target":"KETK_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.grahamdigital.weather.wsls","org":"Graham Media Group","target":"WSLS_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.kprc","org":"Graham Media Group","target":"KPRC_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.wkmg","org":"Graham Media Group","target":"WKMG_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.ksat","org":"Graham Media Group","target":"KSAT_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.pnsdigital.weather.wjxt","org":"Graham Media Group","target":"WJXT_universal","expiry":"2026-07-11","days":128},
+{"status":"ok","bundle":"com.stubby.wx","org":"BTK Enterprises","target":"Stubbys_universal","expiry":"2026-07-12","days":129},
+{"status":"ok","bundle":"com.futurimedia.zstorm","org":"Futuri Media","target":"Zimmer_universal","expiry":"2026-07-18","days":135},
+{"status":"ok","bundle":"com.awn.wx","org":"The Alabama Weather Network","target":"AWN_universal","expiry":"2026-07-31","days":148},
+{"status":"ok","bundle":"com.wdky.fox56wx","org":"Nexstar Broadcasting","target":"WDKY_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.easttn.wx","org":"eastTNweather LLC","target":"East_TN_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.wmbbweather","org":"Nexstar Broadcasting","target":"WMBB_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.katu.wx","org":"Sinclair Broadcast Group","target":"KATU_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.norcal.weather","org":"Mike Krueger","target":"NorCal_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wsi.WSIWeatherLiveVIPIR-11","org":"LIN Television Corporation","target":"WJHL_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wcmh.wx","org":"Media General","target":"WCHM.Wx","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.pahomepageweather","org":"Nexstar Broadcasting","target":"WBRE_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.baronservices.wxworx","org":"Baron Services","target":"Baron.critical","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.wsnj.wx","org":"NorCast Media Group LLC","target":"WSNJ_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.newssynergy.klbkweather","org":"Nexstar Broadcasting","target":"KLBK_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.boknows.wx","org":"Bohdan Cole","target":"BoKnows_universal","expiry":"2026-08-30","days":178},
+{"status":"ok","bundle":"com.laplata.wx","org":"La Plata County Colorado","target":"","expiry":"2026-08-31","days":179},
+{"status":"ok","bundle":"com.canalmeteo.wx","org":"Poniente Media Group LLC","target":"","expiry":"2026-08-31","days":179},
+{"status":"ok","bundle":"com.gulfcoast.wx","org":"Gulf Coast Weather Solutions LLC","target":"GulfCoast_universal","expiry":"2026-09-07","days":186},
+{"status":"ok","bundle":"com.panhandle.wx","org":"Panhandle Weather","target":"Panhandle_universal","expiry":"2026-09-19","days":198},
+{"status":"ok","bundle":"com.foothillsweather","org":"Christopher White","target":"Foothills_Wx_universal","expiry":"2026-09-20","days":199},
+{"status":"ok","bundle":"com.emerson.wx","org":"Emerson Productions LLC","target":"Emerson_Digital_universal","expiry":"2026-09-20","days":199},
+{"status":"ok","bundle":"com.nickhausen.wx","org":"Nicholas Holdinghausen","target":"Nick_Hausen_universal","expiry":"2026-10-04","days":213},
+{"status":"ok","bundle":"com.hutch.wx","org":"Hutch Johnson","target":"Hutch.Wx","expiry":"2026-10-15","days":224},
+{"status":"ok","bundle":"com.southerntnweather.weather","org":"Elijah Kirby","target":"South_TN_Wx","expiry":"2026-10-15","days":224},
+{"status":"ok","bundle":"com.baronservices.tnvalleyweather","org":"Ben Luna","target":"TN_Valley_Wx_universal","expiry":"2026-10-19","days":227},
+{"status":"ok","bundle":"com.thecajunnavy.wx","org":"United Cajun Navy","target":"","expiry":"2026-11-09","days":249},
+{"status":"ok","bundle":"com.krdo.KRDO-Weather","org":"News-Press & Gazette Company","target":"KRDO_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.knpn.wx","org":"News-Press & Gazette Company","target":"KNPN_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.kesq","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.npgb-sb.newsreader","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.kifi","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.sld.iapp.kion","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.newssynergy.kmiz","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.stjoenp","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.krdo","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.newssynergy.ktvxweathernexstar","org":"Nexstar Broadcasting","target":"KTVX_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.ktvz","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.nexstar.kgbt.KGBT-WX","org":"Nexstar Broadcasting","target":"KVEO_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.kvia","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.newssynergy.wtajweather","org":"Nexstar Broadcasting","target":"","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.centralla.wx","org":"Nicholas Mikulas","target":"CenLa_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.kesq.KESQ-FirstAlert","org":"News-Press & Gazette Company","target":"KESQ_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.kifi.wx","org":"News-Press & Gazette Company","target":"KIFI_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.kion.KION-Weather-2","org":"News-Press & Gazette Company","target":"KION_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.kmiz.ABC17Stormtrack","org":"News-Press & Gazette Company","target":"KMIZ_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.ktvz.KTVZ-Weather","org":"News-Press & Gazette Company","target":"KTVZ_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.kvia.ABC7-StormTRACK","org":"News-Press & Gazette Company","target":"KVIA_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.newssynergy.centralpaweather","org":"Nexstar Broadcasting","target":"WTAJ_universal","expiry":"2026-11-13","days":253},
+{"status":"ok","bundle":"com.dougheady.wx","org":"Doug Heady Weather LLC","target":"DougHeady_universal","expiry":"2026-11-21","days":261},
+{"status":"ok","bundle":"com.arkansas.weather","org":"Arkansas Weather Network LLC","target":"Arkansas_Wx_universal","expiry":"2026-12-13","days":283},
+{"status":"ok","bundle":"com.wvns.wvnstormtracker59","org":"Nexstar Broadcasting","target":"WV_WVNS_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.mobiquityinc.floridastorms","org":"University of Florida","target":"UF_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.kard.wx","org":"Nexstar Broadcasting","target":"KARD_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.keyt.First-Alert-WX","org":"News-Press & Gazette Company","target":"KEYT_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.newssynergy.fourstatesweather","org":"Nexstar Broadcasting","target":"KSNF_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.ksnw.Storm-Tracker-3","org":"LIN Television Corporation","target":"KSN_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.baronservices.saftnet","org":"Baron Services","target":"Baron.SAFTNet_phone","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.localtvllc.livealert19","org":"Nexstar Broadcasting","target":"WHNT_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wkbn.WKBN-27-Weather","org":"LIN Television Corporation","target":"WKBN_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wowk.wowkstormtracker13","org":"Nexstar Broadcasting","target":"WV_WOWK_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.wthrwx","org":"VideoIndiana","target":"WTHR_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wtrf.wtrfstormtracker7","org":"Nexstar Broadcasting","target":"WV_WTRF_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wboy.wboystormtracker12","org":"Nexstar Broadcasting","target":"WV_WBOY_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.ktbs.Storm-Team-3","org":"KTBS Inc.","target":"KTBS_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wxxv.Weather-Edge","org":"Morris Network","target":"WXXV_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wdef.WDEF-Wx","org":"WDEF TV","target":"WDEF_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.kvew.wx","org":"Evening Telegram Company","target":"KVEW_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wmgt.41FirstAlert","org":"Morris Network Inc.","target":"WMGT_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.wtvq.weather","org":"Morris Network Inc.","target":"WTVQ_universal","expiry":"2027-01-03","days":304},
+{"status":"ok","bundle":"com.heartlandtv.kqtv.KQ2-Weather","org":"Heartland Media LLC","target":"","expiry":"2027-01-16","days":316},
+{"status":"ok","bundle":"com.wsi.WSIWeatherKRGVweather","org":"Mobile Video Tapes","target":"KRGV_universal","expiry":"2027-02-05","days":337},
+{"status":"ok","bundle":"com.nqlblq.wx","org":"Nick Lilja","target":"NickLilja_universal","expiry":"2027-02-05","days":337},
+{"status":"ok","bundle":"com.tuttle.wx","org":"Aaron Tuttle LLC","target":"Aaron.Tuttle_universal","expiry":"2027-02-08","days":340},
+{"status":"ok","bundle":"com.wnky.wx","org":"Marquee Broadcasting Kentucky","target":"WNKY_universal","expiry":"2027-02-27","days":359},
+{"status":"ok","bundle":"com.kcau.weather","org":"Nexstar Broadcasting","target":"KCAU_universal","expiry":"2027-02-27","days":359},
+{"status":"ok","bundle":"com.wish.weather","org":"CHANNEL 8 WISH TV","target":"WISH_universal","expiry":"2027-02-27","days":359},
+{"status":"ok","bundle":"com.wwtv.Doppler9and10","org":"Heritage Broadcasting Company of Michigan","target":"WWTV_universal","expiry":"2027-02-27","days":359},
+{"status":"ok","bundle":"com.wway.StormTrack3","org":"WWAY-TV","target":"WWAY_universal","expiry":"2027-02-27","days":359},
+{"status":"ok","bundle":"com.durant.wx","org":"City of Durant","target":"Durant_universal","expiry":"2027-03-06","days":366},
+{"status":"ok","bundle":"com.mediageneral.wsiwsav","org":"LIN Television Corporation","target":"WSAV_universal","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.cbcnm.iapp.now.khq","org":"KHQ Incorporated","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.sld.iapp.kndo","org":"KHQ Incorporated","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.doapps.id3616","org":"KHQ Incorporated","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.mobdub.kotv.reader","org":"Griffin Television OKC","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.mobdub.kwtv.reader","org":"Griffin Television OKC","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.doapps.id3614","org":"KHQ Incorporated","target":"","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.nexstar.wjzy.FOX-46-Weather","org":"Nexstar Broadcasting","target":"WJZY_universal","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.auburn.wx","org":"Auburn University","target":"Auburn","expiry":"2027-03-15","days":375},
+{"status":"ok","bundle":"com.northgeorgia.wx","org":"North Georgia Majestic Weather LLC","target":"","expiry":"2027-04-01","days":392},
+{"status":"ok","bundle":"com.newssynergy.BRProudWx","org":"Nexstar Broadcasting","target":"WGMB_universal","expiry":"2027-04-03","days":394}
+];
+const STATUS_ORDER = {critical:0, warning:1, ok:2, expired:3, unknown:4};
+let currentFilter = 'all';
+let currentSort = {col: 'days', dir: 1};
+
+function daysLabel(d) {
+  if (d === null) return 'N/A';
+  if (d < 0) return d + ' days';
+  if (d === 0) return 'Today';
+  return '+' + d + ' days';
+}
+
+function renderRow(c) {
+  const statusLabel = c.status.charAt(0).toUpperCase() + c.status.slice(1);
+  const targetCell = c.target
+    ? '<span class="target-name">' + c.target + '</span>'
+    : '<span class="target-none">not in project</span>';
+  return '<tr>' +
+    '<td><span class="badge ' + c.status + '"><span class="dot"></span>' + statusLabel + '</span></td>' +
+    '<td>' + targetCell + '</td>' +
+    '<td><span class="bundle-id">' + c.bundle + '</span></td>' +
+    '<td><span class="org-name">' + (c.org || '\u2014') + '</span></td>' +
+    '<td class="expiry-date">' + (c.expiry || '\u2014') + '</td>' +
+    '<td class="days-cell ' + c.status + '">' + daysLabel(c.days) + '</td>' +
+    '</tr>';
+}
+
+function applyFilters() {
+  const search = document.getElementById('search').value.toLowerCase();
+  let filtered = CERTS.filter(c => {
+    if (currentFilter === 'unmatched') { if (c.target) return false; }
+    else if (currentFilter !== 'all' && c.status !== currentFilter) return false;
+    if (search && !c.bundle.toLowerCase().includes(search) &&
+        !c.org.toLowerCase().includes(search) &&
+        !c.target.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  filtered.sort((a, b) => {
+    let av, bv;
+    if (currentSort.col === 'status') { av = STATUS_ORDER[a.status]||99; bv = STATUS_ORDER[b.status]||99; }
+    else if (currentSort.col === 'days') { av = a.days === null ? 9999 : a.days; bv = b.days === null ? 9999 : b.days; }
+    else { av = (a[currentSort.col]||'').toLowerCase(); bv = (b[currentSort.col]||'').toLowerCase(); }
+    if (av < bv) return -currentSort.dir;
+    if (av > bv) return currentSort.dir;
+    return 0;
+  });
+  document.getElementById('tbody').innerHTML = filtered.map(renderRow).join('');
+  document.getElementById('count-label').textContent = 'Showing ' + filtered.length + ' of ' + CERTS.length + ' certificates';
+  document.getElementById('no-results').classList.toggle('hidden', filtered.length > 0);
+  document.getElementById('cert-table').classList.toggle('hidden', filtered.length === 0);
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.f-' + f).classList.add('active');
+  applyFilters();
+}
+
+function sortBy(col) {
+  if (currentSort.col === col) { currentSort.dir *= -1; }
+  else { currentSort.col = col; currentSort.dir = 1; }
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted'));
+  const cols = ['status','target','bundle','org','expiry','days'];
+  const idx = cols.indexOf(col);
+  if (idx >= 0) document.querySelectorAll('th')[idx].classList.add('sorted');
+  applyFilters();
+}
+
+applyFilters();
+</script>
+</body>
+</html>
