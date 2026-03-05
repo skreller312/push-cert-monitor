@@ -78,7 +78,7 @@
     <h1>Push Certificate Monitor</h1>
     <div class="subtitle">Apple Push Services &mdash; Keychain vs MOB-225 Targets &mdash; Imminent &le;7d &bull; Critical &le;14d &bull; Warning &le;30d</div>
   </div>
-  <div class="generated">Generated 2026-03-05 18:06 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
+  <div class="generated">Generated 2026-03-05 18:25 UTC<br><span style="color:#3a4060;font-size:0.75rem">Auto-updated daily via LaunchAgent</span></div>
 </header>
 <div class="summary">
   <div class="stat-card total"><div class="num">121</div><div class="label">Total Certs</div></div>
@@ -145,10 +145,10 @@ const CERTS = [
 {"status":"ok","bundle":"com.ktmf.baron.weather","org":"KHQ Incorporated","target":"KTMF_universal","expiry":"2026-07-11","days":127,"appname":"Montana Weather Authority","version":"6.9.0","updated":"2025-03-24"},
 {"status":"ok","bundle":"com.ketk.baron.weather","org":"Nexstar Broadcasting","target":"KETK_universal","expiry":"2026-07-11","days":127,"appname":"East Texas Storm Team","version":"6.8.1","updated":"2022-09-14"},
 {"status":"ok","bundle":"com.pnsdigital.weather.ksat","org":"Graham Media Group","target":"KSAT_universal","expiry":"2026-07-11","days":127,"appname":"KSAT 12 Weather Authority","version":"7.0.5","updated":"2026-02-19"},
+{"status":"ok","bundle":"com.pnsdigital.weather.wjxt","org":"Graham Media Group","target":"WJXT_universal","expiry":"2026-07-11","days":127,"appname":"News4Jax Weather Authority","version":"7.0.5","updated":"2026-02-19"},
 {"status":"ok","bundle":"com.grahamdigital.weather.wsls","org":"Graham Media Group","target":"WSLS_universal","expiry":"2026-07-11","days":128,"appname":"WSLS 10 Roanoke Weather","version":"7.0.5","updated":"2026-02-19"},
 {"status":"ok","bundle":"com.pnsdigital.weather.kprc","org":"Graham Media Group","target":"KPRC_universal","expiry":"2026-07-11","days":128,"appname":"KPRC 2 Weather","version":"7.0.5","updated":"2026-02-19"},
 {"status":"ok","bundle":"com.pnsdigital.weather.wkmg","org":"Graham Media Group","target":"WKMG_universal","expiry":"2026-07-11","days":128,"appname":"News 6 Pinpoint Weather WKMG","version":"7.0.5","updated":"2026-02-19"},
-{"status":"ok","bundle":"com.pnsdigital.weather.wjxt","org":"Graham Media Group","target":"WJXT_universal","expiry":"2026-07-11","days":128,"appname":"News4Jax Weather Authority","version":"7.0.5","updated":"2026-02-19"},
 {"status":"ok","bundle":"com.stubby.wx","org":"BTK Enterprises","target":"Stubbys_universal","expiry":"2026-07-12","days":129,"appname":"Stubby WX","version":"7.0.2","updated":"2025-07-03"},
 {"status":"ok","bundle":"com.futurimedia.zstorm","org":"Futuri Media","target":"Zimmer_universal","expiry":"2026-07-18","days":135,"appname":"Zimmer Storm Center","version":"7.0.1","updated":"2026-01-22"},
 {"status":"ok","bundle":"com.awn.wx","org":"The Alabama Weather Network","target":"AWN_universal","expiry":"2026-07-31","days":148,"appname":"Alabama Weather Network","version":"7.0.6","updated":"2026-02-03"},
@@ -186,6 +186,7 @@ const CERTS = [
 {"status":"ok","bundle":"com.ktvz.KTVZ-Weather","org":"News-Press & Gazette Company","target":"KTVZ_universal","expiry":"2026-11-13","days":252,"appname":"KTVZ Local Alert Weather App","version":"7.0.2","updated":"2025-08-18"},
 {"status":"ok","bundle":"com.kvia.ABC7-StormTRACK","org":"News-Press & Gazette Company","target":"KVIA_universal","expiry":"2026-11-13","days":252,"appname":"ABC-7 KVIA Weather & Traffic","version":"7.0.1","updated":"2026-02-27"},
 {"status":"ok","bundle":"com.newssynergy.centralpaweather","org":"Nexstar Broadcasting","target":"WTAJ_universal","expiry":"2026-11-13","days":252,"appname":"WTAJ Your Weather Authority","version":"6.9.0","updated":"2023-12-20"},
+{"status":"ok","bundle":"com.newssynergy.wtajweather","org":"Nexstar Broadcasting","target":"","expiry":"2026-11-13","days":252,"appname":"","version":"","updated":""},
 {"status":"ok","bundle":"com.cbcnm.iapp.now.kesq","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KESQ Palm Springs News","version":"7.1","updated":"2025-10-08"},
 {"status":"ok","bundle":"com.npgb-sb.newsreader","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KEYT Santa Barbara, SLO News","version":"7.2","updated":"2026-01-27"},
 {"status":"ok","bundle":"com.cbcnm.iapp.now.kifi","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KIFI Idaho Falls News","version":"7.3","updated":"2026-01-27"},
@@ -195,22 +196,21 @@ const CERTS = [
 {"status":"ok","bundle":"com.cbcnm.iapp.now.krdo","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KRDO 13 Colorado Springs News","version":"7.2","updated":"2026-01-27"},
 {"status":"ok","bundle":"com.cbcnm.iapp.now.ktvz","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KTVZ 21 Bend, Central OR News","version":"7.2","updated":"2026-02-11"},
 {"status":"ok","bundle":"com.cbcnm.iapp.now.kvia","org":"News-Press & Gazette Company","target":"","expiry":"2026-11-13","days":253,"appname":"KVIA ABC7 El Paso News","version":"7.1","updated":"2025-09-18"},
-{"status":"ok","bundle":"com.newssynergy.wtajweather","org":"Nexstar Broadcasting","target":"","expiry":"2026-11-13","days":253,"appname":"","version":"","updated":""},
 {"status":"ok","bundle":"com.centralla.wx","org":"Nicholas Mikulas","target":"CenLa_universal","expiry":"2026-11-13","days":253,"appname":"CenLa Weather","version":"7.0.0","updated":"2026-01-07"},
 {"status":"ok","bundle":"com.dougheady.wx","org":"Doug Heady Weather LLC","target":"DougHeady_universal","expiry":"2026-11-21","days":261,"appname":"Doug Heady Weather","version":"7.0.2","updated":"2026-01-05"},
 {"status":"ok","bundle":"com.arkansas.weather","org":"Arkansas Weather Network LLC","target":"Arkansas_Wx_universal","expiry":"2026-12-13","days":283,"appname":"Arkansas Weather Network","version":"7.0.4","updated":"2026-01-06"},
 {"status":"ok","bundle":"com.wvns.wvnstormtracker59","org":"Nexstar Broadcasting","target":"WV_WVNS_universal","expiry":"2027-01-03","days":303,"appname":"StormTracker 59 WVNS","version":"6.9.1","updated":"2024-02-21"},
 {"status":"ok","bundle":"com.kard.wx","org":"Nexstar Broadcasting","target":"KARD_universal","expiry":"2027-01-03","days":303,"appname":"KTVE/KARD Weather","version":"6.9.1","updated":"2024-03-19"},
+{"status":"ok","bundle":"com.keyt.First-Alert-WX","org":"News-Press & Gazette Company","target":"KEYT_universal","expiry":"2027-01-03","days":303,"appname":"NewsChannel 3-12 FirstAlert WX","version":"6.9.1","updated":"2025-02-03"},
+{"status":"ok","bundle":"com.newssynergy.fourstatesweather","org":"Nexstar Broadcasting","target":"KSNF_universal","expiry":"2027-01-03","days":303,"appname":"Weather KSN16 KODE12","version":"6.8.1","updated":"2022-09-15"},
+{"status":"ok","bundle":"com.ksnw.Storm-Tracker-3","org":"LIN Television Corporation","target":"KSN_universal","expiry":"2027-01-03","days":303,"appname":"KSN Storm Track 3","version":"6.9.0","updated":"2023-12-19"},
 {"status":"ok","bundle":"com.baronservices.saftnet","org":"Baron Services","target":"Baron.SAFTNet_phone","expiry":"2027-01-03","days":303,"appname":"Alabama SAF-T-Net","version":"6.9.0","updated":"2024-01-02"},
 {"status":"ok","bundle":"com.localtvllc.livealert19","org":"Nexstar Broadcasting","target":"WHNT_universal","expiry":"2027-01-03","days":303,"appname":"WHNT Live Alert 19","version":"7.0.2","updated":"2026-01-14"},
 {"status":"ok","bundle":"com.wkbn.WKBN-27-Weather","org":"LIN Television Corporation","target":"WKBN_universal","expiry":"2027-01-03","days":303,"appname":"WKBN 27 Weather - Youngstown","version":"6.9.1","updated":"2024-11-25"},
+{"status":"ok","bundle":"com.wowk.wowkstormtracker13","org":"Nexstar Broadcasting","target":"WV_WOWK_universal","expiry":"2027-01-03","days":303,"appname":"StormTracker 13","version":"6.9.0","updated":"2023-12-18"},
+{"status":"ok","bundle":"com.wtrf.wtrfstormtracker7","org":"Nexstar Broadcasting","target":"WV_WTRF_universal","expiry":"2027-01-03","days":303,"appname":"StormTracker 7","version":"6.9.0","updated":"2023-12-18"},
 {"status":"ok","bundle":"com.mobiquityinc.floridastorms","org":"University of Florida","target":"UF_universal","expiry":"2027-01-03","days":304,"appname":"Florida Storms","version":"6.8.2","updated":"2023-02-08"},
-{"status":"ok","bundle":"com.keyt.First-Alert-WX","org":"News-Press & Gazette Company","target":"KEYT_universal","expiry":"2027-01-03","days":304,"appname":"NewsChannel 3-12 FirstAlert WX","version":"6.9.1","updated":"2025-02-03"},
-{"status":"ok","bundle":"com.newssynergy.fourstatesweather","org":"Nexstar Broadcasting","target":"KSNF_universal","expiry":"2027-01-03","days":304,"appname":"Weather KSN16 KODE12","version":"6.8.1","updated":"2022-09-15"},
-{"status":"ok","bundle":"com.ksnw.Storm-Tracker-3","org":"LIN Television Corporation","target":"KSN_universal","expiry":"2027-01-03","days":304,"appname":"KSN Storm Track 3","version":"6.9.0","updated":"2023-12-19"},
-{"status":"ok","bundle":"com.wowk.wowkstormtracker13","org":"Nexstar Broadcasting","target":"WV_WOWK_universal","expiry":"2027-01-03","days":304,"appname":"StormTracker 13","version":"6.9.0","updated":"2023-12-18"},
 {"status":"ok","bundle":"com.cbcnm.iapp.now.wthrwx","org":"VideoIndiana","target":"WTHR_universal","expiry":"2027-01-03","days":304,"appname":"WTHR Live Doppler 13 Weather","version":"70001.0.5","updated":"2025-11-21"},
-{"status":"ok","bundle":"com.wtrf.wtrfstormtracker7","org":"Nexstar Broadcasting","target":"WV_WTRF_universal","expiry":"2027-01-03","days":304,"appname":"StormTracker 7","version":"6.9.0","updated":"2023-12-18"},
 {"status":"ok","bundle":"com.wboy.wboystormtracker12","org":"Nexstar Broadcasting","target":"WV_WBOY_universal","expiry":"2027-01-03","days":304,"appname":"StormTracker 12","version":"6.8.1","updated":"2022-09-15"},
 {"status":"ok","bundle":"com.ktbs.Storm-Team-3","org":"KTBS Inc.","target":"KTBS_universal","expiry":"2027-01-03","days":304,"appname":"Storm Team 3","version":"6.9.1","updated":"2024-12-12"},
 {"status":"ok","bundle":"com.wxxv.Weather-Edge","org":"Morris Network","target":"WXXV_universal","expiry":"2027-01-03","days":304,"appname":"WXXV Weather","version":"7.0.1","updated":"2026-01-06"},
